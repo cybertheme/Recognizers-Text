@@ -44,9 +44,9 @@ namespace Microsoft.Recognizers.Text.Number.Ukrainian
         public static string AllOrdinalRegex
             => $@"(({IntegerExtractor.AllIntRegex})?(\s+)?({BasicOrdinalRegex}))";
 
-        protected sealed override string ExtractType { get; } = Constants.SYS_NUM_ORDINAL; // "Ordinal";
-
         internal sealed override ImmutableDictionary<Regex, TypeTag> Regexes { get; }
+
+        protected sealed override string ExtractType { get; } = Constants.SYS_NUM_ORDINAL; // "Ordinal";
 
         public static OrdinalExtractor GetInstance(NumberOptions options = NumberOptions.None)
         {
