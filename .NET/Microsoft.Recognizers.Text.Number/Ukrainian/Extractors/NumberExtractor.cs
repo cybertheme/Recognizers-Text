@@ -1,4 +1,4 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 using System.Text.RegularExpressions;
 
 namespace Microsoft.Recognizers.Text.Number.Ukrainian
@@ -8,7 +8,8 @@ namespace Microsoft.Recognizers.Text.Number.Ukrainian
         internal sealed override ImmutableDictionary<Regex, TypeTag> Regexes { get; }
         protected sealed override string ExtractType { get; } = Constants.SYS_NUM; // "Number";
 
-        public NumberExtractor(NumberMode mode = NumberMode.Default)
+        public NumberExtractor(NumberMode mode = NumberMode.Default, NumberOptions options = NumberOptions.None)
+            : base(options)
         {
             var builder = ImmutableDictionary.CreateBuilder<Regex, TypeTag>();
             //Add Cardinal
