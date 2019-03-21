@@ -8,6 +8,8 @@ namespace Microsoft.Recognizers.Text.Number.Ukrainian
         internal sealed override ImmutableDictionary<Regex, TypeTag> Regexes { get; }
         protected sealed override string ExtractType { get; } = Constants.SYS_NUM; // "Number";
 
+        private static readonly ConcurrentDictionary<(NumberMode, NumberOptions), NumberExtractor> Instances =
+            new ConcurrentDictionary<(NumberMode, NumberOptions), NumberExtractor>();
         public NumberExtractor(NumberMode mode = NumberMode.Default, NumberOptions options = NumberOptions.None)
             : base(options)
         {
