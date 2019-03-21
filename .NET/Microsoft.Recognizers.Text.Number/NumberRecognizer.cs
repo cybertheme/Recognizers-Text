@@ -273,7 +273,23 @@ namespace Microsoft.Recognizers.Text.Number
                 (options) => new PercentModel(
                     AgnosticNumberParserFactory.GetParser(AgnosticNumberParserType.Percentage, new DutchNumberParserConfiguration()),
                     new Dutch.PercentageExtractor(options)));
+            RegisterModel<NumberModel>(
+                Culture.Ukrainian,
+                (options) => new NumberModel(
+                    AgnosticNumberParserFactory.GetParser(AgnosticNumberParserType.Number, new DutchNumberParserConfiguration()),
+                    Ukrainian.NumberExtractor.GetInstance(NumberMode.PureNumber)));
 
+            RegisterModel<OrdinalModel>(
+                Culture.Ukrainian,
+                (options) => new OrdinalModel(
+                    AgnosticNumberParserFactory.GetParser(AgnosticNumberParserType.Ordinal, new DutchNumberParserConfiguration()),
+                    Ukrainian.OrdinalExtractor.GetInstance()));
+
+            RegisterModel<PercentModel>(
+                Culture.Ukrainian,
+                (options) => new PercentModel(
+                    AgnosticNumberParserFactory.GetParser(AgnosticNumberParserType.Percentage, new DutchNumberParserConfiguration()),
+                    new Ukrainian.PercentageExtractor(options)));
             /*
             RegisterModel<NumberRangeModel>(
                 Culture.Dutch,
