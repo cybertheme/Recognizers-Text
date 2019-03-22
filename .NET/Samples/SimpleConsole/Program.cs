@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Microsoft.Recognizers.Text;
 //using Microsoft.Recognizers.Text.Choice;
 //using Microsoft.Recognizers.Text.DateTime;
@@ -19,14 +20,18 @@ namespace SimpleConsole
         public static void Main(string[] args)
         {
             ShowIntro();
-
+            //Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            //Console.OutputEncoding = Encoding.GetEncoding(1251);
+            Console.OutputEncoding = Encoding.UTF8;
+            //System.Text.Encoding.RegisterProvider(Encoding.CodePages.CodePagesEncodingProvider.Instance);
             while (true)
             {
                 // Read the text to recognize
                 Console.WriteLine("Enter the text to recognize:");
                 var input = Console.ReadLine()?.Trim();
-                Console.WriteLine();
+                Console.WriteLine(input);
 
+                input = "23 рази як я був третім";
                 if (input?.ToLower() == "exit")
                 {
                     // Close application if user types "exit"

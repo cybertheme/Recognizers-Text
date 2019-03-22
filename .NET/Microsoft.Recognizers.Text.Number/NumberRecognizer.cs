@@ -9,6 +9,7 @@ using Microsoft.Recognizers.Text.Number.Japanese;
 using Microsoft.Recognizers.Text.Number.Korean;
 using Microsoft.Recognizers.Text.Number.Portuguese;
 using Microsoft.Recognizers.Text.Number.Spanish;
+using Microsoft.Recognizers.Text.Number.Ukrainian;
 
 namespace Microsoft.Recognizers.Text.Number
 {
@@ -276,19 +277,19 @@ namespace Microsoft.Recognizers.Text.Number
             RegisterModel<NumberModel>(
                 Culture.Ukrainian,
                 (options) => new NumberModel(
-                    AgnosticNumberParserFactory.GetParser(AgnosticNumberParserType.Number, new DutchNumberParserConfiguration()),
+                    AgnosticNumberParserFactory.GetParser(AgnosticNumberParserType.Number, new UkrainianNumberParserConfiguration()),
                     Ukrainian.NumberExtractor.GetInstance(NumberMode.PureNumber)));
 
             RegisterModel<OrdinalModel>(
                 Culture.Ukrainian,
                 (options) => new OrdinalModel(
-                    AgnosticNumberParserFactory.GetParser(AgnosticNumberParserType.Ordinal, new DutchNumberParserConfiguration()),
+                    AgnosticNumberParserFactory.GetParser(AgnosticNumberParserType.Ordinal, new UkrainianNumberParserConfiguration()),
                     Ukrainian.OrdinalExtractor.GetInstance()));
 
             RegisterModel<PercentModel>(
                 Culture.Ukrainian,
                 (options) => new PercentModel(
-                    AgnosticNumberParserFactory.GetParser(AgnosticNumberParserType.Percentage, new DutchNumberParserConfiguration()),
+                    AgnosticNumberParserFactory.GetParser(AgnosticNumberParserType.Percentage, new UkrainianNumberParserConfiguration()),
                     new Ukrainian.PercentageExtractor(options)));
             /*
             RegisterModel<NumberRangeModel>(
