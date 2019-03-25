@@ -274,23 +274,23 @@ namespace Microsoft.Recognizers.Text.Number
                 (options) => new PercentModel(
                     AgnosticNumberParserFactory.GetParser(AgnosticNumberParserType.Percentage, new DutchNumberParserConfiguration()),
                     new Dutch.PercentageExtractor(options)));
-            //RegisterModel<NumberModel>(
-            //    Culture.Ukrainian,
-            //    (options) => new NumberModel(
-            //        AgnosticNumberParserFactory.GetParser(AgnosticNumberParserType.Number, new UkrainianNumberParserConfiguration()),
-            //        Ukrainian.NumberExtractor.GetInstance(NumberMode.PureNumber)));
+            RegisterModel<NumberModel>(
+                Culture.Ukrainian,
+                (options) => new NumberModel(
+                    AgnosticNumberParserFactory.GetParser(AgnosticNumberParserType.Number, new UkrainianNumberParserConfiguration()),
+                    Ukrainian.NumberExtractor.GetInstance(NumberMode.PureNumber)));
 
-            //RegisterModel<OrdinalModel>(
-            //    Culture.Ukrainian,
-            //    (options) => new OrdinalModel(
-            //        AgnosticNumberParserFactory.GetParser(AgnosticNumberParserType.Ordinal, new UkrainianNumberParserConfiguration()),
-            //        Ukrainian.OrdinalExtractor.GetInstance()));
+            RegisterModel<OrdinalModel>(
+                Culture.Ukrainian,
+                (options) => new OrdinalModel(
+                    AgnosticNumberParserFactory.GetParser(AgnosticNumberParserType.Ordinal, new UkrainianNumberParserConfiguration()),
+                    Ukrainian.OrdinalExtractor.GetInstance()));
 
-            //RegisterModel<PercentModel>(
-            //    Culture.Ukrainian,
-            //    (options) => new PercentModel(
-            //        AgnosticNumberParserFactory.GetParser(AgnosticNumberParserType.Percentage, new UkrainianNumberParserConfiguration()),
-            //        new Ukrainian.PercentageExtractor(options)));
+            RegisterModel<PercentModel>(
+                Culture.Ukrainian,
+                (options) => new PercentModel(
+                    AgnosticNumberParserFactory.GetParser(AgnosticNumberParserType.Percentage, new UkrainianNumberParserConfiguration()),
+                    new Ukrainian.PercentageExtractor(options)));
             /*
             RegisterModel<NumberRangeModel>(
                 Culture.Dutch,
