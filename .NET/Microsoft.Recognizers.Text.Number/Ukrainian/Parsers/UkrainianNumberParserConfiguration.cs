@@ -36,6 +36,7 @@ namespace Microsoft.Recognizers.Text.Number.Ukrainian
             DigitalNumberRegex = new Regex(
                 @"((?<=\b)(сто|тисяча|мільйон|мільярд|трильйон|дюжина(s)?)(?=\b))|((?<=(\d|\b))(k|t|m|g|b)(?=\b))",
                 RegexOptions.IgnoreCase | RegexOptions.Singleline);
+            NegativeNumberSignRegex = new Regex(@"^((мінус)\s+).*");
         }
 
         public override IEnumerable<string> NormalizeTokenSet(IEnumerable<string> tokens, ParseResult context)

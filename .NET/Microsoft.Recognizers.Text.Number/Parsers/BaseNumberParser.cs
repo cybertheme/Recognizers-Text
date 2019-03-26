@@ -139,12 +139,12 @@ namespace Microsoft.Recognizers.Text.Number
             }
             else if (ret?.Value != null)
             {
-                if (isNegative)
-                {
-                    // Recover the original extracted Text
-                    ret.Text = matchNegative.Groups[1].Value + extResult.Text;
-                    ret.Value = -(double)ret.Value;
-                }
+                //if (isNegative)
+                //{
+                //    // Recover the original extracted Text
+                //    ret.Text = matchNegative.Groups[1].Value + extResult.Text;
+                //    ret.Value = -(double)ret.Value;
+                //}
 
                 ret.ResolutionStr = GetResolutionStr(ret.Value);
             }
@@ -268,12 +268,12 @@ namespace Microsoft.Recognizers.Text.Number
             handle = Config.HalfADozenRegex.Replace(handle, Config.HalfADozenText);
 
             // Handling cases like "last", "next one", "previous one"
-            if (Config.RelativeReferenceMap.ContainsKey(extResult.Text))
-            {
-                result.Value = Config.RelativeReferenceMap[extResult.Text];
-            }
-            else
-            {
+            //if (Config.RelativeReferenceMap.ContainsKey(extResult.Text))
+            //{
+            //    result.Value = Config.RelativeReferenceMap[extResult.Text];
+            //}
+            //else
+            //{
                 var numGroup = handle.Split(Config.WrittenDecimalSeparatorTexts.ToArray(), StringSplitOptions.RemoveEmptyEntries);
 
                 var intPart = numGroup[0];
@@ -310,7 +310,7 @@ namespace Microsoft.Recognizers.Text.Number
                 }
 
                 result.Value = intPartRet + pointPartRet;
-            }
+            //}
 
             return result;
         }
