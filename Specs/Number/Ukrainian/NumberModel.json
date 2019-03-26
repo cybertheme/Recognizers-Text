@@ -1,0 +1,497 @@
+[
+  {
+    "Input": "2",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "2",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "2"
+        },
+        "Start": 0,
+        "End": 0
+      }
+    ]
+  },
+  {
+    "Input": "одиниця",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "одиниця",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "1"
+        },
+        "Start": 0,
+        "End": 6
+      }
+    ]
+  },
+  {
+    "Input": "1/2",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "1/2",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "0,5"
+        },
+        "Start": 0,
+        "End": 2
+      }
+    ]
+  },
+  {
+    "Input": "половина",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "половина",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "0,5"
+        },
+        "Start": 0,
+        "End": 7
+      }
+    ]
+  },
+  {
+    "Input": "півтора",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "півтора",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "1,5"
+        },
+        "Start": 0,
+        "End": 6
+      }
+    ]
+  },
+  {
+    "Input": "дві третини",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "дві третини",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "0,666666666666667"
+        },
+        "Start": 0,
+        "End": 10
+      }
+    ]
+  },
+  {
+    "Input": "дві з половиною",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "дві з половиною",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "2,5"
+        },
+        "Start": 0,
+        "End": 14
+      }
+    ]
+  },
+  {
+    "Input": "дві цілих три десятих",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "дві цілих три десятих",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "2,3"
+        },
+        "Start": 0,
+        "End": 20
+      }
+    ]
+  },
+  {
+    "Input": "2,35",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "2,35",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "2,35"
+        },
+        "Start": 0,
+        "End": 3
+      }
+    ]
+  },
+  {
+    "Input": "2.000,352",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "2.000,352",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "2000,352"
+        },
+        "Start": 0,
+        "End": 8
+      }
+    ]
+  },
+  {
+    "Input": "2,357",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "2,357",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "2,357"
+        },
+        "Start": 0,
+        "End": 4
+      }
+    ]
+  },
+  {
+    "Input": "2,3",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "2,3",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "2,3"
+        },
+        "Start": 0,
+        "End": 2
+      }
+    ]
+  },
+  {
+    "Input": "2.300",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "2.300",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "2300"
+        },
+        "Start": 0,
+        "End": 4
+      }
+    ]
+  },
+  {
+    "Input": "два",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "два",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "2"
+        },
+        "Start": 0,
+        "End": 2
+      }
+    ]
+  },
+  {
+    "Input": "4.800",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "4.800",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "4800"
+        },
+        "Start": 0,
+        "End": 4
+      }
+    ]
+  },
+  {
+    "Input": "4,800",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "4,800",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "4,8"
+        },
+        "Start": 0,
+        "End": 4
+      }
+    ]
+  },
+  {
+    "Input": "Близько ста слів",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "ста",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "100"
+        },
+        "Start": 8,
+        "End": 10
+      }
+    ]
+  },
+  {
+    "Input": "шістнадцять хвилин",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "шістнадцять",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "16"
+        },
+        "Start": 0,
+        "End": 10
+      }
+    ]
+  },
+  {
+    "Input": "дванадцять",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "дванадцять",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "12"
+        },
+        "Start": 0,
+        "End": 9
+      }
+    ]
+  },
+  {
+    "Input": "Десь півдюжини людей",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "півдюжини",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "6"
+        },
+        "Start": 5,
+        "End": 13
+      }
+    ]
+  },
+  {
+    "Input": "Близько шестидесяти авто",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "шестидесяти",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "60"
+        },
+        "Start": 8,
+        "End": 18
+      }
+    ]
+  },
+  {
+    "Input": "триста шістдесят",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "триста шістдесят",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "360"
+        },
+        "Start": 0,
+        "End": 15
+      }
+    ]
+  },
+  {
+    "Input": "сто тридцять одна книжка була куплена вчора",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "сто тридцять одна",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "131"
+        },
+        "Start": 0,
+        "End": 16
+      }
+    ]
+  },
+  {
+    "Input": "сто три",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "сто три",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "103"
+        },
+        "Start": 0,
+        "End": 6
+      }
+    ]
+  },
+  {
+    "Input": "одна тисяча сто п'ятдесят",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "одна тисяча сто п'ятдесят",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "1150"
+        },
+        "Start": 0,
+        "End": 24
+      }
+    ]
+  },
+  {
+    "Input": "два мільйони одна тисяча сто п'ятдесят",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "два мільйони одна тисяча сто п'ятдесят",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "2001150"
+        },
+        "Start": 0,
+        "End": 37
+      }
+    ]
+  },
+  {
+    "Input": "мільйон триста дев'яносто дев'ять тисяч п'ятсот дев'ять",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "мільйон триста дев'яносто дев'ять тисяч п'ятсот дев'ять",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "1399509"
+        },
+        "Start": 0,
+        "End": 54
+      }
+    ]
+  },
+  {
+    "Input": "два мільйони триста дев'яносто дев'ять тисяч п'ятсот сорок дев'ять",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "два мільйони триста дев'яносто дев'ять тисяч п'ятсот сорок дев'ять",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "2399549"
+        },
+        "Start": 0,
+        "End": 65
+      }
+    ]
+  },
+  {
+    "Input": "Близько трьохсот гривень за десять тисяч подарунків",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "трьохсот",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "300"
+        },
+        "Start": 8,
+        "End": 15
+      },
+      {
+        "Text": "десять тисяч",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "10000"
+        },
+        "Start": 28,
+        "End": 39
+      }
+    ]
+  },
+  {
+    "Input": "одна 8-бітна змінна може займати до двохсот п'ятдесяти шести різних станів. Цього достатньо для представлення чисел від нуля до двохсот п'ятдесяти п'яти.",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "одна",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "1"
+        },
+        "Start": 0,
+        "End": 3
+      },
+      {
+        "Text": "8",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "8"
+        },
+        "Start": 5,
+        "End": 5
+      },
+      {
+        "Text": "двохсот п'ятдесяти шести",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "256"
+        },
+        "Start": 31,
+        "End": 54
+      },
+      {
+        "Text": "нуля",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "0"
+        },
+        "Start": 115,
+        "End": 118
+      },
+      {
+        "Text": "двохсот п'ятдесяти п'яти",
+        "TypeName": "number",
+        "Resolution": {
+          "value": "255"
+        },
+        "Start": 128,
+        "End": 151
+      }
+    ]
+  }
+]

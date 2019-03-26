@@ -1,0 +1,251 @@
+[
+  {
+    "Input": "перший",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "перший",
+        "TypeName": "ordinal",
+        "Resolution": {
+          "value": "1"
+        },
+        "Start": 0,
+        "End": 5
+      }
+    ]
+  },
+  {
+    "Input": "другий",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "другий",
+        "TypeName": "ordinal",
+        "Resolution": {
+          "value": "2"
+        },
+        "Start": 0,
+        "End": 5
+      }
+    ]
+  },
+  {
+    "Input": "двадцять п'ятий",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "двадцять п'ятий",
+        "TypeName": "ordinal",
+        "Resolution": {
+          "value": "25"
+        },
+        "Start": 0,
+        "End": 14
+      }
+    ]
+  },
+  {
+    "Input": "У списку він сто тридцять перший",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "сто тридцять перший",
+        "TypeName": "ordinal",
+        "Resolution": {
+          "value": "131"
+        },
+        "Start": 13,
+        "End": 31
+      }
+    ]
+  },
+  {
+    "Input": "Я буду першою!",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "першою",
+        "TypeName": "ordinal",
+        "Resolution": {
+          "value": "1"
+        },
+        "Start": 7,
+        "End": 12
+      }
+    ]
+  },
+  {
+    "Input": "Саме третє видання найбільш цікаве",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "третє",
+        "TypeName": "ordinal",
+        "Resolution": {
+          "value": "3"
+        },
+        "Start": 5,
+        "End": 9
+      }
+    ]
+  },
+  {
+    "Input": "Четвертий",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "Четвертий",
+        "TypeName": "ordinal",
+        "Resolution": {
+          "value": "4"
+        },
+        "Start": 0,
+        "End": 8
+      }
+    ]
+  },
+  {
+    "Input": "Сьогодні одинадцяте чи дванадцяте?",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "одинадцяте",
+        "TypeName": "ordinal",
+        "Resolution": {
+          "value": "11"
+        },
+        "Start": 9,
+        "End": 18
+      },
+      {
+        "Text": "дванадцяте",
+        "TypeName": "ordinal",
+        "Resolution": {
+          "value": "12"
+        },
+        "Start": 23,
+        "End": 32
+      }
+    ]
+  },
+  {
+    "Input": "Тисячний покупець отримує безкоштовний подарунок",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "Тисячний",
+        "TypeName": "ordinal",
+        "Resolution": {
+          "value": "1000"
+        },
+        "Start": 0,
+        "End": 7
+      }
+    ]
+  },
+  {
+    "Input": "це 3-й банан",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "3-й",
+        "TypeName": "ordinal",
+        "Resolution": {
+          "value": "3"
+        },
+        "Start": 3,
+        "End": 5
+      }
+    ]
+  },
+  {
+    "Input": "Це вже мільярдна спроба зробити 5-те завдання",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "мільярдна",
+        "TypeName": "ordinal",
+        "Resolution": {
+          "value": "1000000000"
+        },
+        "Start": 7,
+        "End": 15
+      },
+      {
+        "Text": "5-те",
+        "TypeName": "ordinal",
+        "Resolution": {
+          "value": "5"
+        },
+        "Start": 32,
+        "End": 35
+      }
+    ]
+  },
+  {
+    "Input": "Перша гра була нудною, і якщо не буде ніяких змін, то навіть сімдесята гра буде нудна.",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "Перша",
+        "TypeName": "ordinal",
+        "Resolution": {
+          "value": "1"
+        },
+        "Start": 0,
+        "End": 4
+      },
+      {
+        "Text": "сімдесята",
+        "TypeName": "ordinal",
+        "Resolution": {
+          "value": "70"
+        },
+        "Start": 61,
+        "End": 69
+      }
+    ]
+  },
+  {
+    "Input": "Якщо рахувати зорі, як перший, другий, третій, то оці будуть трильйонні",
+    "NotSupported": "javascript, python",
+    "Results": [
+      {
+        "Text": "перший",
+        "TypeName": "ordinal",
+        "Resolution": {
+          "value": "1"
+        },
+        "Start": 23,
+        "End": 28
+      },
+      {
+        "Text": "другий",
+        "TypeName": "ordinal",
+        "Resolution": {
+          "value": "2"
+        },
+        "Start": 31,
+        "End": 36
+      },
+      {
+        "Text": "третій",
+        "TypeName": "ordinal",
+        "Resolution": {
+          "value": "3"
+        },
+        "Start": 39,
+        "End": 44
+      },
+      {
+        "Text": "трильйонні",
+        "TypeName": "ordinal",
+        "Resolution": {
+          "value": "1000000000000"
+        },
+        "Start": 61,
+        "End": 70
+      }
+    ]
+  }
+]
