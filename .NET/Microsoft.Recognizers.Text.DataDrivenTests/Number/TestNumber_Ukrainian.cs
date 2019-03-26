@@ -1,11 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Recognizers.Text.DataDrivenTests;
 
-namespace Microsoft.Recognizers.Text.DataDrivenTests.Number
+namespace Microsoft.Recognizers.Text.Number.Tests
 {
     [TestClass]
     class TestNumber_Ukrainian : TestBase

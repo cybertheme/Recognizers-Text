@@ -6,6 +6,7 @@ using Microsoft.Recognizers.Text.Number.Italian;
 using Microsoft.Recognizers.Text.Number.Japanese;
 using Microsoft.Recognizers.Text.Number.Korean;
 using Microsoft.Recognizers.Text.Number.Spanish;
+using Microsoft.Recognizers.Text.Number.Ukrainian;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Microsoft.Recognizers.Text.Number.Tests
@@ -99,6 +100,18 @@ namespace Microsoft.Recognizers.Text.Number.Tests
             IParser parseNumber = AgnosticNumberParserFactory.GetParser(AgnosticNumberParserType.Number, new ItalianNumberParserConfiguration());
             IParser parseCardinal = AgnosticNumberParserFactory.GetParser(AgnosticNumberParserType.Cardinal, new ItalianNumberParserConfiguration());
             IParser parsePercentage = AgnosticNumberParserFactory.GetParser(AgnosticNumberParserType.Percentage, new ItalianNumberParserConfiguration());
+
+            Assert.IsTrue(parseNumber is BaseNumberParser);
+            Assert.IsTrue(parseCardinal is BaseNumberParser);
+            Assert.IsTrue(parsePercentage is BasePercentageParser);
+        }
+
+        [TestMethod]
+        public void TestUkrainianParser()
+        {
+            IParser parseNumber = AgnosticNumberParserFactory.GetParser(AgnosticNumberParserType.Number, new UkrainianNumberParserConfiguration());
+            IParser parseCardinal = AgnosticNumberParserFactory.GetParser(AgnosticNumberParserType.Cardinal, new UkrainianNumberParserConfiguration());
+            IParser parsePercentage = AgnosticNumberParserFactory.GetParser(AgnosticNumberParserType.Percentage, new UkrainianNumberParserConfiguration());
 
             Assert.IsTrue(parseNumber is BaseNumberParser);
             Assert.IsTrue(parseCardinal is BaseNumberParser);
