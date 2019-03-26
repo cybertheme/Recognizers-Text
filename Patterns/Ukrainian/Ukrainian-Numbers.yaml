@@ -1,0 +1,370 @@
+---
+LangMarker: Ukr
+#Integer Regex
+RoundNumberIntegerRegex: !simpleRegex
+  def: (тисяча|тисяч|тисячі|тисячами|тисячу|тисячею|мільйон|мільйона|мільйону|мільйоном|мільйоні|мільйони|мільйонів|мільйонам|мільйонах|мільярд|мільярда|мільярду|мільярдом|мільярді|мільярди|мільярдів|мільярдам|мільярдах|трильйон|трильйона|трильйону|трильйоном|трильйоні|трильйони|трильйонів|трильйонам|трильйонах)
+ZeroToNineIntegerRegex: !simpleRegex
+  def: (нуль|нуля|нулю|нулеві|нулем|один|одна|одні|одного|однієї|одної|одних|одному|одній|одним|одну|однією|одною|одними|два|дві|двох|двом|двома|три|трьох|трьом|трьома|чотири|чотирьох|чотирьом|чотирма|п'ять|п'яти|п'ятьох|п'ятьом|п'ятьма|п'ятьома|шість|шести|шістьох|шістьом|шістьма|шістьома|сім|семи|сімох|сімом|сімома|вісім|восьми|вісьмох|вісьмом|вісьмома|дев'ять|дев'яти|дев'ятьми|дев'ятьох|дев'ятьом|дев'ятьма)
+NegativeNumberTermsRegex: !simpleRegex
+  def: ((мінус|від'ємні)\s+)
+NegativeNumberSignRegex: !nestedRegex
+  def: ^{NegativeNumberTermsRegex}.*
+  references: [ NegativeNumberTermsRegex ]
+AnIntRegex: !simpleRegex
+  def: (an|a)(?=\s)
+TenToNineteenIntegerRegex: !simpleRegex
+  def: (десять|десяти|десятьми|десятьох|десятьом|десятьма|одинадцять|одинадцяти|одинадцятьма|одинадцятьох|одинадцятьом|дванадцять|дванадцяти|дванадцятьма|дванадцятьох|дванадцятьом|дюжина|дюжини|дюжен|тринадцять|тринадцяти|тринадцятьма|тринадцятьох|тринадцятьом|чотирнадцять|чотирнадцяти|чотирнадцятьма|чотирнадцятьох|чотирнадцятьом|п'ятнадцять|п'ятнадцяти|п'ятнадцятьма|п'ятнадцятьох|п'ятнадцятьом|шістнадцять|шістнадцяти|шістнадцятьма|шістнадцятьох|шістнадцятьом|сімнадцять|сімнадцяти|сімнадцятьма|сімнадцятьох|сімнадцятьом|вісімнадцять|вісімнадцяти|вісімнадцятьма|вісімнадцятьох|вісімнадцятьом|дев'ятнадцять|дев'ятнадцяти|дев'ятнадцятьма|дев'ятнадцятьох|дев'ятнадцятьом)
+TensNumberIntegerRegex: !simpleRegex
+  def: (двадцять|двадцятьти|двадцятьма|двадцятьох|двадцятьом|тридцять|тридцяти|тридцятьма|тридцятьох|тридцятьом|сорок|сорока|п'ятдесят|п'ятдесяти|п'ятдесятьма|п'ятдесятьох|п'ятдесятьом|шістдесят|шістдесяти|шістдесятьма|шістдесятьох|шістдесятьом|сімдесят|сімдесяти|сімдесятьма|сімдесятьох|сімдесятьом|вісімдесят|восьмидесяти|вісімдесятьма|вісімдесятьох|вісімдесятьом|дев'яносто|дев'яноса)
+SeparaIntRegex: !nestedRegex
+  def: ((({TenToNineteenIntegerRegex}|({TensNumberIntegerRegex}(\s+(and\s+)?|\s*-\s*){ZeroToNineIntegerRegex})|{TensNumberIntegerRegex}|{ZeroToNineIntegerRegex})(\s+{RoundNumberIntegerRegex})*))|(({AnIntRegex}(\s+{RoundNumberIntegerRegex})+))
+  references: [ TenToNineteenIntegerRegex, TensNumberIntegerRegex, ZeroToNineIntegerRegex, RoundNumberIntegerRegex, AnIntRegex ]
+AllIntRegex: !nestedRegex
+  def: (((({TenToNineteenIntegerRegex}|({TensNumberIntegerRegex}(\s+(and\s+)?|\s*-\s*){ZeroToNineIntegerRegex})|{TensNumberIntegerRegex}|{ZeroToNineIntegerRegex}|{AnIntRegex})(\s+{RoundNumberIntegerRegex})+)\s+(and\s+)?)*{SeparaIntRegex})
+  references: [ TenToNineteenIntegerRegex, TensNumberIntegerRegex, ZeroToNineIntegerRegex, AnIntRegex, RoundNumberIntegerRegex, SeparaIntRegex ]
+PlaceHolderPureNumber: !simpleRegex
+  def: \b
+PlaceHolderDefault: !simpleRegex
+  def: \D|\b
+NumbersWithPlaceHolder: !paramsRegex
+  def: (((?<!\d+\s*)-\s*)|(?<=\b))\d+(?!([\.,]\d+[a-zA-Z]))(?={placeholder})
+  params: [ placeholder ]
+NumbersWithSuffix: !nestedRegex
+  def: (((?<!\d+\s*)-\s*)|(?<=\b))\d+\s*{BaseNumbers.NumberMultiplierRegex}(?=\b)
+  references: [ BaseNumbers.NumberMultiplierRegex ]
+RoundNumberIntegerRegexWithLocks: !nestedRegex
+  def: (?<=\b)\d+\s+{RoundNumberIntegerRegex}(?=\b)
+  references: [ RoundNumberIntegerRegex ]
+NumbersWithDozenSuffix: !simpleRegex
+  def: (((?<!\d+\s*)-\s*)|(?<=\b))\d+\s+дюжин(?:а|и)?(?=\b)
+AllIntRegexWithLocks: !nestedRegex
+  def: ((?<=\b){AllIntRegex}(?=\b))
+  references: [ AllIntRegex ]
+AllIntRegexWithDozenSuffixLocks: !nestedRegex
+  def: (?<=\b)(((половина\s+)?a\s+дюжини)|({AllIntRegex}\s+дюжини?))(?=\b)
+  references: [ AllIntRegex ]
+#Ordinal Regex
+RoundNumberOrdinalRegex: !simpleRegex
+  def: ((?:тисячн|мільйонн|мільярдн|трильйонн)(?:ий|а|і|ого|их|у|ому|ій|ими|ою|им))
+NumberOrdinalRegex: !simpleRegex
+  def: ((?:перш|друг)|(?:ий|а|і|ого|ої|их|ому|ій|им|у|ою|ими)|трет(я|і|ій|ього|ю|іх|третьому|третім|третіми|третьою|четвертий|четверта|четверті|четвертого|четвертих|четверту|четвертому|четвертій|четвертим|четвертою|четвертими|п'ятий|п'ята|п'яті|п'ятого|п'ятих|п'яту|п'ятому|п'ятій|п'ятим|п'ятою|п'ятими|шостий|шоста|шості|шостого|шостих|шосту|шостому|шостій|шостим|шостою|шостими|сьомий|сьома|сьомі|сьомого|сьомих|сьому|сьомому|сьомій|сьомим|сьомою|сьомими|восьмий|восьма|восьмі|восьмого|восьмих|восьму|восьмому|восьмій|восьмим|восьмою|восьмими|дев'ятий|дев'ята|дев'яті|дев'ятого|дев'ятих|дев'яту|дев'ятому|дев'ятій|дев'ятим|дев'ятою|дев'ятими|десятий|десята|десяті|десятого|десятих|десяту|десятому|десятій|десятим|десятою|десятими|одинадцятий|одинадцята|одинадцяті|одинадцятого|одинадцятих|одинадцяту|одинадцятому|одинадцятій|одинадцятим|одинадцятою|одинадцятими|дванадцятий|дванадцята|дванадцяті|дванадцятого|дванадцятих|дванадцяту|дванадцятому|дванадцятій|дванадцятим|дванадцятою|дванадцятими|тринадцятий|тринадцята|тринадцяті|тринадцятого|тринадцятих|тринадцяту|тринадцятому|тринадцятій|тринадцятим|тринадцятою|тринадцятими|чотирнадцятий|чотирнадцята|чотирнадцяті|чотирнадцятого|чотирнадцятих|чотирнадцяту|чотирнадцятому|чотирнадцятій|чотирнадцятим|чотирнадцятою|чотирнадцятими|п'ятнадцятий|п'ятнадцята|п'ятнадцяті|п'ятнадцятого|п'ятнадцятих|п'ятнадцяту|п'ятнадцятому|п'ятнадцятій|п'ятнадцятим|п'ятнадцятою|п'ятнадцятими|шістнадцятий|шістнадцята|шістнадцяті|шістнадцятого|шістнадцятих|шістнадцяту|шістнадцятому|шістнадцятій|шістнадцятим|шістнадцятою|шістнадцятими|сімнадцятий|сімнадцята|сімнадцяті|сімнадцятого|сімнадцятих|сімнадцяту|сімнадцятому|сімнадцятій|сімнадцятим|сімнадцятою|сімнадцятими|вісімнадцятий|вісімнадцята|вісімнадцяті|вісімнадцятого|вісімнадцятих|вісімнадцяту|вісімнадцятому|вісімнадцятій|вісімнадцятим|вісімнадцятою|вісімнадцятими|дев'ятнадцятий|дев'ятнадцята|дев'ятнадцяті|дев'ятнадцятого|дев'ятнадцятих|дев'ятнадцяту|дев'ятнадцятому|дев'ятнадцятій|дев'ятнадцятим|дев'ятнадцятою|дев'ятнадцятими|двадцятий|двадцята|двадцяті|двадцятого|двадцятих|двадцяту|двадцятому|двадцятій|двадцятим|двадцятою|двадцятими|тридцятий|тридцята|тридцяті|тридцятого|тридцятих|тридцяту|тридцятому|тридцятій|тридцятим|тридцятою|тридцятими|сороковий|сорокова|сорокові|сорокового|сорокових|сорокову|сороковому|сороковій|сороковим|сороковою|сороковими|п'тидесятий|п'тидесята|п'тидесяті|п'тидесятого|п'тидесятих|п'тидесяту|п'тидесятому|п'тидесятій|п'тидесятим|п'тидесятою|п'тидесятими|шестидесятий|шестидесята|шестидесяті|шестидесятого|шестидесятих|шестидесяту|шестидесятому|шестидесятій|шестидесятим|шестидесятою|шестидесятими|семидесятий|семидесята|семидесяті|семидесятого|семидесятих|семидесяту|семидесятому|семидесятій|семидесятим|семидесятою|семидесятими|восьмидесятий|восьмидесята|восьмидесяті|восьмидесятого|восьмидесятих|восьмидесяту|восьмидесятому|восьмидесятій|восьмидесятим|восьмидесятою|восьмидесятими|дев'яностий|дев'яноста|дев'яності|дев'яностого|дев'яностих|дев'яносту|дев'яностому|дев'яностій|дев'яностим|дев'яностою|дев'яностими|сотий|сота|соті|сотого|сотих|соту|сотому|сотій|сотим|сотою|сотими|двухсотий|двухсота|двухсоті|двухсотого|двухсотих|двухсоту|двухсотому|двухсотій|двухсотим|двухсотою|двухсотими|трьохсотий|трьохсота|трьохсоті|трьохсотого|трьохсотих|трьохсоту|трьохсотому|трьохсотій|трьохсотим|трьохсотою|трьохсотими|чотирьохсотий|чотирьохсота|чотирьохсоті|чотирьохсотого|чотирьохсотих|чотирьохсоту|чотирьохсотому|чотирьохсотій|чотирьохсотим|чотирьохсотою|чотирьохсотими|п'ятисотий|п'ятисота|п'ятисоті|п'ятисотого|п'ятисотих|п'ятисоту|п'ятисотому|п'ятисотій|п'ятисотим|п'ятисотою|п'ятисотими|шестисотий|шестисота|шестисоті|шестисотого|шестисотих|шестисоту|шестисотому|шестисотій|шестисотим|шестисотою|шестисотими|семисотий|семисота|семисоті|семисотого|семисотих|семисоту|семисотому|семисотій|семисотим|семисотою|семисотими|восьмисотий|восьмисота|восьмисоті|восьмисотого|восьмисотих|восьмисоту|восьмисотому|восьмисотій|восьмисотим|восьмисотою|восьмисотими|дев'ятисотий|дев'ятисота|дев'ятисоті|дев'ятисотого|дев'ятисотих|дев'ятисоту|дев'ятисотому|дев'ятисотій|дев'ятисотим|дев'ятисотою|дев'ятисотими|тисячний|тисячна|тисячні|тисячного|тисячних|тисячну|тисячному|тисячній|тисячним|тисячною|тисячними|мільйонний|мільйонна|мільйонні|мільйонного|мільйонних|мільйонну|мільйонному|мільйонній|мільйонним|мільйонною|мільйонними|мільярдний|мільярдна|мільярдні|мільярдного|мільярдних|мільярдну|мільярдному|мільярдній|мільярдним|мільярдною|мільярдними|трильйонний|трильйонна|трильйонні|трильйонного|трильйонних|трильйонну|трильйонному|трильйонній|трильйонним|трильйонною|трильйонними)
+RelativeOrdinalRegex: !simpleRegex
+  def: (наступн(?:ий|а|е|і|ими|ого|их|у)|(попередн(?:ій|я|є)|(передостанн(?:ій|я|є)|the one before the last( one)?|the last but one|(ante)?penultimate|last|next)
+BasicOrdinalRegex: !nestedRegex
+  def: ({NumberOrdinalRegex}|{RelativeOrdinalRegex})
+  references: [ NumberOrdinalRegex, RelativeOrdinalRegex ]
+SuffixBasicOrdinalRegex: !nestedRegex
+  def: ((((({TensNumberIntegerRegex}(\s+(and\s+)?|\s*-\s*){ZeroToNineIntegerRegex})|{TensNumberIntegerRegex}|{ZeroToNineIntegerRegex}|{AnIntRegex})(\s+{RoundNumberIntegerRegex})+)\s+(and\s+)?)*({TensNumberIntegerRegex}(\s+|\s*-\s*))?{BasicOrdinalRegex})
+  references: [ TensNumberIntegerRegex, ZeroToNineIntegerRegex, AnIntRegex, RoundNumberIntegerRegex, BasicOrdinalRegex ]
+SuffixRoundNumberOrdinalRegex: !nestedRegex
+  def: (({AllIntRegex}\s+){RoundNumberOrdinalRegex})
+  references: [ AllIntRegex, RoundNumberOrdinalRegex ]
+AllOrdinalRegex: !nestedRegex
+  def: ({SuffixBasicOrdinalRegex}|{SuffixRoundNumberOrdinalRegex})
+  references: [ SuffixBasicOrdinalRegex, SuffixRoundNumberOrdinalRegex ]
+OrdinalSuffixRegex: !simpleRegex
+  def: (?<=\b)((\d*(1ий|2ий|3ій|4ий|5ий|6ий|7ий|8ий|9ий|0ий))|(11ий|12ий))(?=\b)
+OrdinalNumericRegex: !simpleRegex
+  def: (?<=\b)(\d{1,3}(\s*,\s*\d{3})*\s*th)(?=\b)
+OrdinalRoundNumberRegex: !nestedRegex
+  def: (?<!(a|an)\s+){RoundNumberOrdinalRegex}
+  references: [ RoundNumberOrdinalRegex ]
+OrdinalEnglishRegex: !nestedRegex
+  def: (?<=\b){AllOrdinalRegex}(?=\b)
+  references: [ AllOrdinalRegex ]
+#Fraction Regex
+FractionNotationWithSpacesRegex: !simpleRegex
+  def: (((?<=\W|^)-\s*)|(?<=\b))\d+\s+\d+[/]\d+(?=(\b[^/]|$))
+FractionNotationRegex: !simpleRegex
+  def: (((?<=\W|^)-\s*)|(?<![/-])(?<=\b))\d+[/]\d+(?=(\b[^/]|$))
+FractionNounRegex: !nestedRegex
+  def: (?<=\b)({AllIntRegex}\s+(and\s+)?)?({AllIntRegex})(\s+|\s*-\s*)((({AllOrdinalRegex})|({RoundNumberOrdinalRegex}))s|halves|quarters)(?=\b)
+  references: [ AllIntRegex, AllOrdinalRegex, RoundNumberOrdinalRegex ]
+FractionNounWithArticleRegex: !nestedRegex
+  def: (?<=\b)({AllIntRegex}\s+(and\s+)?)?(a|an|one)(\s+|\s*-\s*)(?!\bfirst\b|\bsecond\b)(({AllOrdinalRegex})|({RoundNumberOrdinalRegex})|half|quarter)(?=\b)
+  references: [ AllIntRegex, AllOrdinalRegex, RoundNumberOrdinalRegex ]
+FractionPrepositionRegex: !nestedRegex
+  def: (?<=\b)(?<numerator>({AllIntRegex})|((?<![\.,])\d+))\s+(over|in|out\s+of)\s+(?<denominator>({AllIntRegex})|(\d+)(?![\.,]))(?=\b)
+  references: [ AllIntRegex ]
+FractionPrepositionWithinPercentModeRegex: !nestedRegex
+  def: (?<=\b)(?<numerator>({AllIntRegex})|((?<![\.,])\d+))\s+over\s+(?<denominator>({AllIntRegex})|(\d+)(?![\.,]))(?=\b)
+  references: [ AllIntRegex ]
+#Double Regex
+AllPointRegex: !nestedRegex
+  def: ((\s+{ZeroToNineIntegerRegex})+|(\s+{SeparaIntRegex}))
+  references: [ ZeroToNineIntegerRegex, SeparaIntRegex ]
+AllFloatRegex: !nestedRegex
+  def: '{AllIntRegex}(\s+point){AllPointRegex}'
+  references: [ AllIntRegex, AllPointRegex ]
+DoubleWithMultiplierRegex: !nestedRegex
+  def: (((?<!\d+\s*)-\s*)|((?<=\b)(?<!\d+[\.,])))\d+[\.,]\d+\s*{BaseNumbers.NumberMultiplierRegex}(?=\b)
+  references: [ BaseNumbers.NumberMultiplierRegex ]
+DoubleExponentialNotationRegex: !simpleRegex
+  def: (((?<!\d+\s*)-\s*)|((?<=\b)(?<!\d+[\.,])))(\d+([\.,]\d+)?)e([+-]*[1-9]\d*)(?=\b)
+DoubleCaretExponentialNotationRegex: !simpleRegex
+  def: (((?<!\d+\s*)-\s*)|((?<=\b)(?<!\d+[\.,])))(\d+([\.,]\d+)?)\^([+-]*[1-9]\d*)(?=\b)
+DoubleDecimalPointRegex: !paramsRegex
+  def: (((?<!\d+\s*)-\s*)|((?<=\b)(?<!\d+[\.,])))\d+[\.,]\d+(?!([\.,]\d+))(?={placeholder})
+  params: [ placeholder ]
+DoubleWithoutIntegralRegex: !paramsRegex
+  def: (?<=\s|^)(?<!(\d+))[\.,]\d+(?!([\.,]\d+))(?={placeholder})
+  params: [ placeholder ]
+DoubleWithRoundNumber: !nestedRegex
+  def: (((?<!\d+\s*)-\s*)|((?<=\b)(?<!\d+[\.,])))\d+[\.,]\d+\s+{RoundNumberIntegerRegex}(?=\b)
+  references: [ RoundNumberIntegerRegex ]
+DoubleAllFloatRegex: !nestedRegex
+  def: ((?<=\b){AllFloatRegex}(?=\b))
+  references: [ AllFloatRegex ]
+ConnectorRegex: !simpleRegex
+    def: (?<spacer>and)
+#Percentage Regex
+NumberWithSuffixPercentage: !nestedRegex
+  def: (?<!%)({BaseNumbers.NumberReplaceToken})(\s*)(%(?!{BaseNumbers.NumberReplaceToken})|(per cents|per cent|cents|cent|percentage|percents|percent)\b)
+  references: [ BaseNumbers.NumberReplaceToken ]
+FractionNumberWithSuffixPercentage: !nestedRegex
+  def: (({BaseNumbers.FractionNumberReplaceToken})\s+of)
+  references: [ BaseNumbers.FractionNumberReplaceToken ]
+NumberWithPrefixPercentage: !nestedRegex
+  def: (per cent of|percent of|percents of)(\s*)({BaseNumbers.NumberReplaceToken})
+  references: [ BaseNumbers.NumberReplaceToken ]
+NumberWithPrepositionPercentage: !nestedRegex
+  def: ({BaseNumbers.NumberReplaceToken})\s*(in|out\s+of)\s*({BaseNumbers.NumberReplaceToken})
+  references: [ BaseNumbers.NumberReplaceToken ]
+#NumberRange Regex
+TillRegex: !simpleRegex
+  def: (to|through|--|-|—|——|~|–)
+MoreRegex: !simpleRegex
+  def: ((bigger|greater|more|higher|larger)(\s+than)?|above|over|(?<!<|=)>)
+LessRegex: !simpleRegex
+  def: ((less|lower|smaller|fewer)(\s+than)?|below|under|(?<!>|=)<)
+EqualRegex: !simpleRegex
+  def: (equal(s|ing)?(\s+(to|than))?|(?<!<|>)=)
+MoreOrEqualPrefix: !nestedRegex
+  def: ((no\s+{LessRegex})|(at\s+least))
+  references: [ LessRegex ]
+MoreOrEqual: !nestedRegex
+  def: (({MoreRegex}\s+(or)?\s+{EqualRegex})|({EqualRegex}\s+(or)?\s+{MoreRegex})|{MoreOrEqualPrefix}(\s+(or)?\s+{EqualRegex})?|({EqualRegex}\s+(or)?\s+)?{MoreOrEqualPrefix}|>\s*=)
+  references: [ MoreRegex, EqualRegex, LessRegex, MoreOrEqualPrefix ]
+MoreOrEqualSuffix: !simpleRegex
+  def: ((and|or)\s+(more|greater|higher|larger|bigger)((?!\s+than)|(\s+than(?!(\s*\d+)))))
+LessOrEqualPrefix: !nestedRegex
+  def: ((no\s+{MoreRegex})|(at\s+most))
+  references: [ MoreRegex ]
+LessOrEqual: !nestedRegex
+  def: (({LessRegex}\s+(or)?\s+{EqualRegex})|({EqualRegex}\s+(or)?\s+{LessRegex})|{LessOrEqualPrefix}(\s+(or)?\s+{EqualRegex})?|({EqualRegex}\s+(or)?\s+)?{LessOrEqualPrefix}|<\s*=)
+  references: [ LessRegex, EqualRegex, MoreRegex, LessOrEqualPrefix ]
+LessOrEqualSuffix: !simpleRegex
+  def: ((and|or)\s+(less|lower|smaller|fewer)((?!\s+than)|(\s+than(?!(\s*\d+)))))
+NumberSplitMark: !simpleRegex
+  def: (?![,.](?!\d+))
+MoreRegexNoNumberSucceed: !simpleRegex
+  def: ((bigger|greater|more|higher|larger)((?!\s+than)|\s+(than(?!(\s*\d+))))|(above|over)(?!(\s*\d+)))
+LessRegexNoNumberSucceed: !simpleRegex
+  def: ((less|lower|smaller|fewer)((?!\s+than)|\s+(than(?!(\s*\d+))))|(below|under)(?!(\s*\d+)))
+EqualRegexNoNumberSucceed: !simpleRegex
+  def: (equal(s|ing)?((?!\s+(to|than))|(\s+(to|than)(?!(\s*\d+)))))
+OneNumberRangeMoreRegex1: !nestedRegex
+  def: ({MoreOrEqual}|{MoreRegex})\s*(the\s+)?(?<number1>({NumberSplitMark}.)+)
+  references: [ MoreOrEqual, MoreRegex, NumberSplitMark ]
+OneNumberRangeMoreRegex2: !nestedRegex
+  def: (?<number1>({NumberSplitMark}.)+)\s*{MoreOrEqualSuffix}
+  references: [ MoreOrEqualSuffix, NumberSplitMark ]
+OneNumberRangeMoreSeparateRegex: !nestedRegex
+  def: ({EqualRegex}\s+(?<number1>({NumberSplitMark}.)+)(\s+or\s+){MoreRegexNoNumberSucceed})|({MoreRegex}\s+(?<number1>({NumberSplitMark}.)+)(\s+or\s+){EqualRegexNoNumberSucceed})
+  references: [ EqualRegex, MoreRegex, EqualRegexNoNumberSucceed, MoreRegexNoNumberSucceed, NumberSplitMark ]
+OneNumberRangeLessRegex1: !nestedRegex
+  def: ({LessOrEqual}|{LessRegex})\s*(the\s+)?(?<number2>({NumberSplitMark}.)+)
+  references: [ LessOrEqual, LessRegex, NumberSplitMark ]
+OneNumberRangeLessRegex2: !nestedRegex
+  def: (?<number2>({NumberSplitMark}.)+)\s*{LessOrEqualSuffix}
+  references: [ LessOrEqualSuffix, NumberSplitMark ]
+OneNumberRangeLessSeparateRegex: !nestedRegex
+  def: ({EqualRegex}\s+(?<number1>({NumberSplitMark}.)+)(\s+or\s+){LessRegexNoNumberSucceed})|({LessRegex}\s+(?<number1>({NumberSplitMark}.)+)(\s+or\s+){EqualRegexNoNumberSucceed})
+  references: [ EqualRegex, LessRegex, EqualRegexNoNumberSucceed, LessRegexNoNumberSucceed, NumberSplitMark ]
+OneNumberRangeEqualRegex: !nestedRegex
+  def: '{EqualRegex}\s*(the\s+)?(?<number1>({NumberSplitMark}.)+)'
+  references: [ EqualRegex, NumberSplitMark ]
+TwoNumberRangeRegex1: !nestedRegex
+  def: between\s*(the\s+)?(?<number1>({NumberSplitMark}.)+)\s*and\s*(the\s+)?(?<number2>({NumberSplitMark}.)+)
+  references: [ NumberSplitMark ]
+TwoNumberRangeRegex2: !nestedRegex
+  def: ({OneNumberRangeMoreRegex1}|{OneNumberRangeMoreRegex2})\s*(and|but|,)\s*({OneNumberRangeLessRegex1}|{OneNumberRangeLessRegex2})
+  references: [ OneNumberRangeMoreRegex1, OneNumberRangeMoreRegex2, OneNumberRangeLessRegex1, OneNumberRangeLessRegex2 ]
+TwoNumberRangeRegex3: !nestedRegex
+  def: ({OneNumberRangeLessRegex1}|{OneNumberRangeLessRegex2})\s*(and|but|,)\s*({OneNumberRangeMoreRegex1}|{OneNumberRangeMoreRegex2})
+  references: [ OneNumberRangeMoreRegex1, OneNumberRangeMoreRegex2, OneNumberRangeLessRegex1, OneNumberRangeLessRegex2 ]
+TwoNumberRangeRegex4: !nestedRegex
+  def: (from\s+)?(?<number1>({NumberSplitMark}(?!\bfrom\b).)+)\s*{TillRegex}\s*(the\s+)?(?<number2>({NumberSplitMark}.)+)
+  references: [ TillRegex, NumberSplitMark ]
+AmbiguousFractionConnectorsRegex: !simpleRegex
+  def: (\bin\b)
+# "in" is ambiguous for cases like "more than 30000 in 2009", other connector "out of", "over" is not ambiguous in English
+#Parser
+DecimalSeparatorChar: !char ','
+FractionMarkerToken: на
+NonDecimalSeparatorChar: !char ','
+HalfADozenText: шість
+WordSeparatorToken: та
+WrittenDecimalSeparatorTexts: [точка]
+WrittenGroupSeparatorTexts: 
+WrittenIntegerSeparatorTexts: [and]
+WrittenFractionSeparatorTexts: [and]
+HalfADozenRegex: !simpleRegex
+  def: \s+a\s+dozen
+DigitalNumberRegex: !nestedRegex
+  def: ((?<=\b)(hundred|thousand|million|billion|trillion|dozen(s)?)(?=\b))|((?<=(\d|\b)){BaseNumbers.MultiplierLookupRegex}(?=\b))
+  references: [ BaseNumbers.MultiplierLookupRegex ]
+CardinalNumberMap: !dictionary
+  types: [ string, long ]
+  entries:
+    a: 1
+    zero: 0
+    an: 1
+    one: 1
+    two: 2
+    three: 3
+    four: 4
+    five: 5
+    six: 6
+    seven: 7
+    eight: 8
+    nine: 9
+    ten: 10
+    eleven: 11
+    twelve: 12
+    dozen: 12
+    dozens: 12
+    thirteen: 13
+    fourteen: 14
+    fifteen: 15
+    sixteen: 16
+    seventeen: 17
+    eighteen: 18
+    nineteen: 19
+    twenty: 20
+    thirty: 30
+    forty: 40
+    fifty: 50
+    sixty: 60
+    seventy: 70
+    eighty: 80
+    ninety: 90
+    hundred: 100
+    thousand: 1000
+    million: 1000000
+    billion: 1000000000
+    trillion: 1000000000000
+OrdinalNumberMap: !dictionary
+  types: [ string, long ]
+  entries:
+    first: 1
+    second: 2
+    secondary: 2
+    half: 2
+    third: 3
+    fourth: 4
+    quarter: 4
+    fifth: 5
+    sixth: 6
+    seventh: 7
+    eighth: 8
+    ninth: 9
+    tenth: 10
+    eleventh: 11
+    twelfth: 12
+    thirteenth: 13
+    fourteenth: 14
+    fifteenth: 15
+    sixteenth: 16
+    seventeenth: 17
+    eighteenth: 18
+    nineteenth: 19
+    twentieth: 20
+    thirtieth: 30
+    fortieth: 40
+    fiftieth: 50
+    sixtieth: 60
+    seventieth: 70
+    eightieth: 80
+    ninetieth: 90
+    hundredth: 100
+    thousandth: 1000
+    millionth: 1000000
+    billionth: 1000000000
+    trillionth: 1000000000000
+    firsts: 1
+    halves: 2
+    thirds: 3
+    fourths: 4
+    quarters: 4
+    fifths: 5
+    sixths: 6
+    sevenths: 7
+    eighths: 8
+    ninths: 9
+    tenths: 10
+    elevenths: 11
+    twelfths: 12
+    thirteenths: 13
+    fourteenths: 14
+    fifteenths: 15
+    sixteenths: 16
+    seventeenths: 17
+    eighteenths: 18
+    nineteenths: 19
+    twentieths: 20
+    thirtieths: 30
+    fortieths: 40
+    fiftieths: 50
+    sixtieths: 60
+    seventieths: 70
+    eightieths: 80
+    ninetieths: 90
+    hundredths: 100
+    thousandths: 1000
+    millionths: 1000000
+    billionths: 1000000000
+    trillionths: 1000000000000
+RoundNumberMap: !dictionary
+  types: [ string, long ]
+  entries:
+    hundred: 100
+    thousand: 1000
+    million: 1000000
+    billion: 1000000000
+    trillion: 1000000000000
+    hundredth: 100
+    thousandth: 1000
+    millionth: 1000000
+    billionth: 1000000000
+    trillionth: 1000000000000
+    hundredths: 100
+    thousandths: 1000
+    millionths: 1000000
+    billionths: 1000000000
+    trillionths: 1000000000000
+    dozen: 12
+    dozens: 12
+    k: 1000
+    m: 1000000
+    g: 1000000000
+    b: 1000000000
+    t: 1000000000000
+AmbiguityFiltersDict: !dictionary
+  types: [ string, string ]
+  entries:
+    '\bone\b': '\b(the|this|that|which)\s+(one)\b'
+RelativeReferenceMap: !dictionary
+  types: [ string, string ]
+  entries:
+    last: N
+    next one: CURR+1
+    previous one: CURR-1
+    the second to last: N-1
+    the one before the last one: N-1
+    next to last: N-1
+    penultimate: N-1
+    the last but one: N-1
+    antepenultimate: N-2
+    next: CURR+1
+...
