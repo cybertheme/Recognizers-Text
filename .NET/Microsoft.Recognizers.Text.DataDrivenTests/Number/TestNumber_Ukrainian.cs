@@ -4,7 +4,7 @@ using Microsoft.Recognizers.Text.DataDrivenTests;
 namespace Microsoft.Recognizers.Text.Number.Tests
 {
     [TestClass]
-    class TestNumber_Ukrainian : TestBase
+    public class TestNumber_Ukrainian : TestBase
     {
         public static TestResources TestResources { get; protected set; }
 
