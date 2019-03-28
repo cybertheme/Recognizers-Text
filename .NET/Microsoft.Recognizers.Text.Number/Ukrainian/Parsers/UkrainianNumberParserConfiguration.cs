@@ -21,7 +21,7 @@ namespace Microsoft.Recognizers.Text.Number.Ukrainian
             DecimalSeparatorChar = '.';
             FractionMarkerToken = "over";
             NonDecimalSeparatorChar = ',';
-            HalfADozenText = "six";
+            HalfADozenText = "шість";
             WordSeparatorToken = "and";
 
             WrittenDecimalSeparatorTexts = new List<string> { "point" };
